@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/Users/admin/.config/herd-lite/bin/php",
+            "args": [
+                "/Users/admin/Projects/learning/password/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
