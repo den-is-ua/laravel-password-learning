@@ -9,6 +9,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
+Route::get('/accounts', function (Request $request) {
+    return $request->user();
+})->middleware('auth:account-api');
+
 Route::get('/accounts/token', function (Request $request) {
     $validated = $request->validate([
         'name' => ['required']
