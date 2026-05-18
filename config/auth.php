@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Account;
 
 return [
 
@@ -46,6 +47,10 @@ return [
             'driver' => 'passport',
             'provider' => 'users',
         ],
+        'account-api' => [
+            'driver' => 'passport',
+            'provider' => 'accounts',
+        ],
     ],
 
     /*
@@ -71,10 +76,10 @@ return [
             'model' => env('AUTH_MODEL', User::class),
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+         'accounts' => [
+             'driver' => 'eloquent',
+             'model' => Account::class,
+         ],
     ],
 
     /*

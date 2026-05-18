@@ -3,11 +3,22 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Models\Account;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
+Route::get('/accounts/token', function (Request $request) {
+    $validated = $request->validate([
+        'name' => ['required']
+    ]);
+    
+    $account = Account::where('name', $validated['name'])->firstOrFail();
+    return response()->json([
+        'token' => $account->createToken('account-token')->accessToken
+    ]);
+});
 
 Route::post('/register', function (Request $request) {
 
