@@ -24,6 +24,23 @@ Route::get('/accounts/token', function (Request $request) {
     ]);
 });
 
+Route::get('/accounts/token/private', function (Request $request) {
+    $validated = $request->validate([
+        'name' => ['required']
+    ]);
+    
+    $account = Account::where('name', $validated['name'])->firstOrFail();
+    return response()->json([
+        'token' => $account->createToken('account-token-private', ['account:private'])->accessToken
+    ]);
+});
+
+Route::get('/accounts/private', function (Request $request) {
+    return response()->json([
+        'private' => true
+    ]);
+})->middleware('auth:account-api', CheckToken::using('account:private'));
+
 Route::post('/register', function (Request $request) {
 
     $validated = $request->validate([
